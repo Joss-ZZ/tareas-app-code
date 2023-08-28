@@ -1,0 +1,56 @@
+<app-menu></app-menu>
+
+<div class="d-flex align-items-center p-4">
+  <p-dropdown [options]="clientes" [(ngModel)]="selectedCliente" optionLabel="name" class="mr-2"></p-dropdown>
+  <p-button label="Agregar objetivo" (click)="agregarItem()" icon="pi pi-check" class="mr-2"></p-button>
+</div>
+
+<p-accordion>
+  <p-accordionTab *ngFor="let item of accordionItems">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center">
+            <i class="pi pi-star-fill mr-2"></i>
+            <span class="vertical-align-middle">{{item.header}}</span>
+            <i class="pi pi-plus-circle ml-2 ml-2" (click)="agregarFila($event, item)"></i>
+        </div>
+    </ng-template>
+    <p-treeTable #treeTable [value]="item.data" [columns]="cols">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" class="text-center">{{ col.header }}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-columns="columns">
+        <tr [ttRow]="rowNode">
+          <td *ngFor="let col of columns" class="text-center align-middle">
+            <ng-container *ngIf="col.field == 'avance'">
+              <p-progressBar [value]="rowNode.node[col.field]"></p-progressBar>
+            </ng-container>
+            <ng-container *ngIf="col.field == 'persona' || col.field == 'proyecto'">
+              <p-avatar label="{{ rowNode.node[col.field][0] }}" styleClass="mr-2" [style]="{ 'background-color': '#9c27b0', color: '#ffffff' }"></p-avatar>
+            </ng-container>
+            <ng-container *ngIf="col.field == 'prioridad'">
+              <i *ngIf="rowNode.node[col.field]" class="pi pi-flag-fill"></i>
+              <i *ngIf="!rowNode.node[col.field]" class="pi pi-flag"></i>
+            </ng-container>
+            <ng-container *ngIf="col.field == 'fecha'">
+              <i *ngIf="rowNode.node[col.field]" class="pi pi-check"></i>
+              <i *ngIf="!rowNode.node[col.field]" class="pi pi-times"></i>
+            </ng-container>
+            <ng-container *ngIf="col.field == 'meta'">
+              <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+              <ng-container *ngIf="rowNode.node.children">
+                {{ rowNode.node[col.field] }}
+                <i class="pi pi-plus ml-2 cursor-pointer" (click)="agregarFilaHija(rowNode.node)"></i>
+              </ng-container>
+              <ng-container *ngIf="!rowNode.node.children">
+                <i class="pi pi-check ml-2"></i>
+                {{ rowNode.node[col.field] }}
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+  </p-accordionTab>
+</p-accordion>

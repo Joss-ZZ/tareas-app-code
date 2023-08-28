@@ -1,0 +1,17 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <div class="d-flex align-items-center" style="display: flex;">
+        <img src="assets/images/logo.png" height="40" class="mr-2" />
+        <span class="text-600 text-l font-medium">QUÍMICA SUIZA - PRUEBA TÉCNICA</span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="align-items-center" style="display: flex;">
+        <label class="mr-2">Cambiar modo</label>
+        <a href="">
+            <p-inputSwitch [(ngModel)]="themeSelection" (onChange)="changeTheme($event.checked)">
+            </p-inputSwitch>
+        </a>
+      </div>
+    </ng-template>
+</p-menubar>

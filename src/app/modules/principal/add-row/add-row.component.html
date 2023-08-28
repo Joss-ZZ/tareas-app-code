@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+    <label for="tarea" class="block text-900 font-medium mb-2">Tarea</label>
+    <input id="tarea" type="text" formControlName="tarea" placeholder="Tarea" pInputText class="w-full mb-3">
+
+    <div class="mb-3">
+        <p-checkbox value="true" formControlName="fecha" inputId="ny1" class="mr-2"></p-checkbox>
+        <label for="ny1" class="font-medium mb-3">Fecha límite</label>
+    </div>
+
+    <div class="mb-3">
+        <p-checkbox value="true" formControlName="prioridad" inputId="ny2" class="mr-2"></p-checkbox>
+        <label for="ny2" class="font-medium mb-3">Prioridad</label>
+    </div>
+
+    <div class="mb-3">
+        <label for="ny2" class="font-medium">Avance</label>
+    </div>
+
+    <div class="mb-5">
+        <p-slider formControlName="avance"></p-slider>
+    </div>
+
+    <button type="button" pButton label="Agregar" icon="pi pi-plus" class="w-full" (click)="agregarRow()"></button>
+</form>
