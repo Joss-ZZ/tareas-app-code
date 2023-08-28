@@ -33,7 +33,7 @@ export class PrincipalComponent {
     this.clientes = [
       { name: 'Jhosimar', code: 1 },
       { name: 'Pedro', code: 2 },
-      { name: 'QuimicaSuiza', code: 3 }
+      { name: 'Alex', code: 3 }
     ];
   }
 
